@@ -2,20 +2,25 @@ package org.xueyu.nettytry;
 
 import java.util.List;
 
+import org.xueyu.conf.UrlMapper;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageDecoder;
 
-public class MyServerHandler1 extends MessageToMessageDecoder<String> {
+
+
+public class MyServerHandlerRMI extends MessageToMessageDecoder<String> {
 
 	@Override
 	protected void decode(ChannelHandlerContext ctx, String msg,
 			List<Object> out) throws Exception {
-		// TODO Auto-generated method stub
-		System.out.println("##process string:"+msg);
-		out.add(msg+"--last\n");
-//		for(Object o: out) {
-//			ctx.writeAndFlush(o);
-//		}
+		if (msg.equals("goo")) {
+			Object obj = UrlMapper.findAndInvokeFunc(msg);
+			out.add(obj);
+		} else {
+			out.add("##miss goo..");
+		}
+		
 	}
 
 }

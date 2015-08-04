@@ -17,7 +17,8 @@ public class ServerInitializer extends ChannelInitializer<SocketChannel> {
 		p.addLast("frame", new LineBasedFrameDecoder(80));
 		p.addLast("stringDecoder", new StringDecoder(CharsetUtil.UTF_8));
 		p.addLast("stringEncoder", new StringEncoder(CharsetUtil.UTF_8));
-		p.addLast("myhandler1", new MyServerHandler1());
+		//p.addLast("myhandler1", new MyServerHandler1());
+		p.addLast("myrmihandle", new MyServerHandlerRMI());
 		p.addLast("last", new MyLastHandler());
 	}
 
