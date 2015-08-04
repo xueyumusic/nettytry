@@ -26,10 +26,13 @@ public class App
         		.channel(NioServerSocketChannel.class)
         		.option(ChannelOption.SO_BACKLOG, 100)
         		.handler(new LoggingHandler(LogLevel.DEBUG))
-        		.childHandler(new ServerInitializer());
+        		//.childHandler(new ServerInitializer());
+        		.childHandler(new HttpServerInitializer());
         	
         	ChannelFuture f = b.bind(8001).sync();
         	f.channel().closeFuture().sync();
+        	
+        	//TimeLimiter t;
         } catch (Exception ex) {
         	
         }
