@@ -5,6 +5,9 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UrlMapper {
 	private static Map<String, Object> urlmapper = new HashMap<String, Object>();
 	static {
@@ -20,6 +23,10 @@ public class UrlMapper {
 		Method method = cs.getMethod(funcname, null);
 		Object obj = method.invoke(null);
 		return obj;
+	}
+	
+	public String getName() {
+		return "url mapper beans";
 	}
 	
 	

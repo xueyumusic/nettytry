@@ -1,5 +1,10 @@
 package org.xueyu.nettytry;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.xueyu.conf.AppConfig;
+import org.xueyu.conf.BeansManager;
+import org.xueyu.conf.UrlMapper;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelOption;
@@ -18,6 +23,15 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
+        
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.register(AppConfig.class);
+        ctx.refresh();
+        //UrlMapper urlmapper = ctx.getBean(UrlMapper.class);
+        UrlMapper urlmapper = BeansManager.getContext().getBean(UrlMapper.class);
+        System.out.println("##beans manager:"+BeansManager.class.getName());
+        System.out.println("##mapper name:" + urlmapper.getName());
+        
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
