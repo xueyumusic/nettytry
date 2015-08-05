@@ -31,7 +31,7 @@ public class MyLastHandler extends ChannelInboundHandlerAdapter {
     		//ctx.writeAndFlush(msg);
     		ByteBuf content = Unpooled.copiedBuffer(respstr, CharsetUtil.UTF_8);
     		DefaultFullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, content);
-    		 response.headers().set(CONTENT_TYPE, "text/plain");
+    		 response.headers().set(CONTENT_TYPE, "text/html");
              response.headers().set(CONTENT_LENGTH, response.content().readableBytes());
     		ctx.writeAndFlush(response);
     		
