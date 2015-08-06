@@ -13,7 +13,8 @@ public class HttpServerInitializer extends ChannelInitializer<SocketChannel> {
 		ChannelPipeline p = ch.pipeline();
 		p.addLast("http", new HttpServerCodec());
 		p.addLast("aggragator", new HttpObjectAggregator(1048576));
-		p.addLast("last", new MyLastHandler());
+		p.addLast("dispatcher", new MyHttpDispatcher());
+		//p.addLast("last", new MyLastHandler());
 	}
 
 }
