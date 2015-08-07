@@ -5,10 +5,12 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UrlMapper {
+public class UrlMapper implements BeanPostProcessor {
 	private static Map<String, Object> urlmapper = new HashMap<String, Object>();
 	private static Map<String, Method> methodMapper = new HashMap<String, Method>();
 	static {
@@ -49,6 +51,19 @@ public class UrlMapper {
 	
 	public String getName() {
 		return "url mapper beans";
+	}
+
+	@Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName)
+			throws BeansException {
+		return bean;
+	}
+
+	@Override
+	public Object postProcessAfterInitialization(Object bean, String beanName)
+			throws BeansException {
+		
+		
 	}
 	
 	
