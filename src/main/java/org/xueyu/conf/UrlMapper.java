@@ -1,5 +1,7 @@
 package org.xueyu.conf;
 
+import io.netty.handler.codec.http.FullHttpRequest;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -10,11 +12,13 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UrlMapper implements BeanPostProcessor {
+public class UrlMapper {
 	private static Map<String, Object> urlmapper = new HashMap<String, Object>();
 	private static Map<String, Method> methodMapper = new HashMap<String, Method>();
+	private static Map<String, String> clsMapper = new HashMap<String, String>();
 	static {
-		urlmapper.put("goo", "org.xueyu.rmi.GooFunc.func");
+		//urlmapper.put("goo", "org.xueyu.rmi.GooFunc.func");
+		urlmapper.put("/testc", "org.xueyu.controller.ControllerTest.test");
 		
 		initUrlMapper();
 	}
@@ -29,12 +33,17 @@ public class UrlMapper implements BeanPostProcessor {
 			try {
 				System.out.println("##full:"+fullclassname+"  funcname:"+funcname);
 				Class<?> cs = Class.forName(fullclassname);
-				Method method = cs.getMethod(funcname, null);
+				Method method = cs.getMethod(funcname, FullHttpRequest.class);
 				//Object obj = method.invoke(null);
 				methodMapper.put(entry.getKey(), method);
+				clsMapper.put(entry.getKey(), fullclassname);
 			} catch (Exception ex) {
-				
+				ex.printStackTrace();
 			}
+		}
+		
+		for (Map.Entry<String, Method> me: methodMapper.entrySet()) {
+			System.out.println("##in mehtod mapper:"+me.getKey()+"  method:"+me.getValue().getName());
 		}
 	}
 	
@@ -54,22 +63,15 @@ public class UrlMapper implements BeanPostProcessor {
 		return method;
 	}
 	
+	public static String findClassName(String uri) {
+		String clsname = clsMapper.get(uri);
+		return clsname;
+	}
+	
 	public String getName() {
 		return "url mapper beans";
 	}
 
-	@Override
-	public Object postProcessBeforeInitialization(Object bean, String beanName)
-			throws BeansException {
-		return bean;
-	}
-
-	@Override
-	public Object postProcessAfterInitialization(Object bean, String beanName)
-			throws BeansException {
-		
-		
-	}
 	
 	
 }
