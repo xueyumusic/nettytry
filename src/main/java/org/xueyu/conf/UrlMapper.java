@@ -49,6 +49,11 @@ public class UrlMapper implements BeanPostProcessor {
 		return obj;
 	}
 	
+	public static Method findMethod(String uri) {
+		Method method = methodMapper.get(uri);
+		return method;
+	}
+	
 	public String getName() {
 		return "url mapper beans";
 	}
