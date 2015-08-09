@@ -17,4 +17,8 @@ public class ControllerTest {
 		System.out.println("##controller test return:"+respstr);
 		return respstr;
 	}
+	
+	public String testPost(FullHttpRequest origreq) {
+		return "post test";
+	}
 }

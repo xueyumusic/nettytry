@@ -19,6 +19,7 @@ public class UrlMapper {
 	static {
 		//urlmapper.put("goo", "org.xueyu.rmi.GooFunc.func");
 		urlmapper.put("/testc", "org.xueyu.controller.ControllerTest.test");
+		urlmapper.put("/testcpost", "org.xueyu.controller.ControllerTest.testPost");
 		
 		initUrlMapper();
 	}
