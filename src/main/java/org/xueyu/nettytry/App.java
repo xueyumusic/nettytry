@@ -1,5 +1,7 @@
 package org.xueyu.nettytry;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.xueyu.conf.AppConfig;
 import org.xueyu.conf.BeansManager;
@@ -20,10 +22,12 @@ import io.netty.handler.logging.LoggingHandler;
  */
 public class App 
 {
+	private static Logger logger = LoggerFactory.getLogger(App.class);
+	
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        
+        logger.info("###log impact:{}", 7);
         AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
         ctx.register(AppConfig.class);
         ctx.refresh();

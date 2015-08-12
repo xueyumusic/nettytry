@@ -90,5 +90,15 @@
     	<artifactId>hibernate-core</artifactId>
     	<version>4.3.10.Final</version>
     </dependency>
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                        <version>1.0.13</version>
+                </dependency>
+                <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-core</artifactId>
+                        <version>1.0.13</version>
+                </dependency>
   </dependencies>
 </project>
